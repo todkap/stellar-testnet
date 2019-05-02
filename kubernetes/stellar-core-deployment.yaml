@@ -65,7 +65,7 @@ spec:
           value: "false"
         - name: UNSAFE_QUORUM
           value: "true"
-        image: satoshipay/stellar-core:10.2.0
+        image: satoshipay/stellar-core:11.0.0
         name: stellar-core
         ports:
         - containerPort: 11625

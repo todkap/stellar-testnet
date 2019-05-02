@@ -20,7 +20,7 @@ spec:
       containers:
       - env:
         - name: POSTGRES_DB
-          value: "stellar-horizon"
+          value: stellar-horizon
         - name: CURRENT_PROTOCOL_VERSION
           value: "10"
         - name: DATABASE_URL
@@ -33,7 +33,7 @@ spec:
           value: postgres://postgres@postgres-sc/stellar-core?sslmode=disable&password=abcd
         - name: STELLAR_CORE_URL
           value: http://stellar-core:11626
-        image: satoshipay/stellar-horizon:0.17.2
+        image: satoshipay/stellar-horizon:0.17.6
         name: stellar-horizon
         ports:
         - containerPort: 8000
