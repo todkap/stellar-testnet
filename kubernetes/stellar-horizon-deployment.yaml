@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose --file ../docker/docker-compose.yml convert
+    kompose.version: 1.18.0 ()
+  creationTimestamp: null
+  labels:
+    io.kompose.service: stellar-horizon
+  name: stellar-horizon
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: stellar-horizon
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_DB
+          value: "stellar-horizon"
+        - name: CURRENT_PROTOCOL_VERSION
+          value: "10"
+        - name: DATABASE_URL
+          value: postgres://postgres@postgres-horizon/stellar-horizon?sslmode=disable&password=abcd
+        - name: INGEST
+          value: "true"
+        - name: NETWORK_PASSPHRASE
+          value: Test SDF Network ; September 2015
+        - name: STELLAR_CORE_DATABASE_URL
+          value: postgres://postgres@postgres-sc/stellar-core?sslmode=disable&password=abcd
+        - name: STELLAR_CORE_URL
+          value: http://stellar-core:11626
+        image: satoshipay/stellar-horizon:0.17.2
+        name: stellar-horizon
+        ports:
+        - containerPort: 8000
+        resources: {}
+      restartPolicy: Always
+
+status: {}

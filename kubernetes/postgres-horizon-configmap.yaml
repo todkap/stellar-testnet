@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-horizon-config
+  labels:
+    app: postgres-horizon
+data:
+  POSTGRES_DB: stellar-horizon
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: abcd

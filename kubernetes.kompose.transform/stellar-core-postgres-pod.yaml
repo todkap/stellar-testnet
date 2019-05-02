@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: stellar-core-postgres
+  name: stellar-core-postgres
+spec:
+  containers:
+  - env:
+    - name: POSTGRES_DB
+      value: stellar-core
+    image: postgres:9
+    name: stellar-core-postgres
+    resources: {}
+  restartPolicy: OnFailure
+status: {}

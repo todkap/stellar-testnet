@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres-horizon
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-horizon
+    spec:
+      containers:
+        - name: postgres-horizon
+          image: postgres:10
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-horizon-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb-horizon
+      volumes:
+        - name: postgredb-horizon
+          persistentVolumeClaim:
+            claimName: postgres-horizon-pv-claim

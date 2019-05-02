@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: postgres-sc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: postgres-sc
+    spec:
+      containers:
+        - name: postgres-sc
+          image: postgres:10
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: postgres-sc-config
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgredb-sc
+      volumes:
+        - name: postgredb-sc
+          persistentVolumeClaim:
+            claimName: postgres-sc-pv-claim

@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: stellar-horizon
+  name: stellar-horizon
+spec:
+  containers:
+  - env:
+    - name: CURRENT_PROTOCOL_VERSION
+      value: "10"
+    - name: DATABASE_URL
+      value: postgres://postgres@stellar-horizon-postgres/stellar-horizon?sslmode=disable
+    - name: INGEST
+      value: "true"
+    - name: NETWORK_PASSPHRASE
+      value: Test SDF Network ; September 2015
+    - name: STELLAR_CORE_DATABASE_URL
+      value: postgres://postgres@stellar-core-postgres/stellar-core?sslmode=disable
+    - name: STELLAR_CORE_URL
+      value: http://stellar-core:11626
+    image: satoshipay/stellar-horizon:0.17.2
+    name: stellar-horizon
+    ports:
+    - containerPort: 8000
+    resources: {}
+  restartPolicy: OnFailure
+status: {}
