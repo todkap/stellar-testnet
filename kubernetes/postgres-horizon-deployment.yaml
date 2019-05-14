@@ -11,16 +11,23 @@ spec:
     spec:
       containers:
         - name: postgres-horizon
-          image: postgres:10
+          image: postgres:10.1
           imagePullPolicy: "IfNotPresent"
           ports:
             - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: postgres-horizon-config
+          # envFrom:
+          #   - configMapRef:
+          #       name: postgres-horizon-config
+          env:
+            - name: POSTGRES_DB
+              value: stellar-horizon
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: abcd
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgredb-horizon
+              name: "postgredb-horizon"
       volumes:
         - name: postgredb-horizon
           persistentVolumeClaim:

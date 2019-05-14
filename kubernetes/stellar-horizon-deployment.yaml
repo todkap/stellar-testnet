@@ -23,14 +23,20 @@ spec:
           value: stellar-horizon
         - name: CURRENT_PROTOCOL_VERSION
           value: "10"
+        - name: DB_URL  
+          value: postgres://postgres@horizon-postgresql/stellar-horizon?sslmode=disable&password=abcd
         - name: DATABASE_URL
-          value: postgres://postgres@postgres-horizon/stellar-horizon?sslmode=disable&password=abcd
+          value: postgres://postgres@horizon-postgresql/stellar-horizon?sslmode=disable&password=abcd
+        - name: DATABASE_PASSWORD
+          value: abcd
         - name: INGEST
           value: "true"
         - name: NETWORK_PASSPHRASE
           value: Test SDF Network ; September 2015
         - name: STELLAR_CORE_DATABASE_URL
           value: postgres://postgres@postgres-sc/stellar-core?sslmode=disable&password=abcd
+        - name: STELLAR_CORE_DATABASE_PASSWORD
+          value: abcd
         - name: STELLAR_CORE_URL
           value: http://stellar-core:11626
         image: satoshipay/stellar-horizon:0.17.6

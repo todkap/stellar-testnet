@@ -3,27 +3,28 @@ apiVersion: v1
 metadata:
   name: postgres-horizon-pv-volume
   labels:
-    type: local
-    app: postgres-horizon
+    app: postgresql
+    release: horizon
+    role: master
 spec:
-  storageClassName: manual
   capacity:
-    storage: 5Gi
+    storage: 10Gi
   accessModes:
-    - ReadWriteMany
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: "/mnt/data"
 ---
-kind: PersistentVolumeClaim
-apiVersion: v1
-metadata:
-  name: postgres-horizon-pv-claim
-  labels:
-    app: postgres-horizon
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteMany
-  resources:
-    requests:
-      storage: 5Gi
+# kind: PersistentVolumeClaim
+# apiVersion: v1
+# metadata:
+#   name: postgres-horizon-pv-claim
+#   labels:
+#     app: postgres-horizon
+# spec:
+#   storageClassName: manual
+#   accessModes:
+#     - ReadWriteMany
+#   resources:
+#     requests:
+#       storage: 5Gi
